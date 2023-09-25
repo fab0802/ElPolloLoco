@@ -5,30 +5,34 @@ class World {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
     this.keyboard = keyboard;
-    this.backgroundObjects = [
-      new BackgroundObjects('img/5_background/layers/air.png', 0),
-      new BackgroundObjects('img/5_background/layers/3_third_layer/1.png', 0),
-      new BackgroundObjects('img/5_background/layers/2_second_layer/1.png', 0),
-      new BackgroundObjects('img/5_background/layers/1_first_layer/1.png', 0),
-    ];
+    this.cameraX = 0;
+    this.level = level1;
     this.character = new Character(this);
-    this.enemies = [new Chicken(), new Chicken(), new Chicken()];
-    this.clouds = [new Cloud()];
     this.drawWorld();
   }
 
   drawWorld() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-    this.addObjectsToMap(this.backgroundObjects);
-    this.addObjectsToMap(this.enemies);
-    this.addObjectsToMap(this.clouds);
+    this.ctx.translate(this.cameraX, 0);
+
+    this.addObjectsToMap(this.level.backgroundObjects);
+    this.addObjectsToMap(this.level.enemies);
+    this.addObjectsToMap(this.level.clouds);
     this.addObjectToMap(this.character);
+
+    this.ctx.translate(-this.cameraX, 0);
 
     requestAnimationFrame(() => this.drawWorld());
   }
 
   addObjectToMap(object) {
+    if (object.otherDirection) {
+      this.ctx.save();
+      this.ctx.translate(object.width, 0);
+      this.ctx.scale(-1, 1);
+      object.x = object.x * -1;
+    }
     this.ctx.drawImage(
       object.img,
       object.x,
@@ -36,6 +40,10 @@ class World {
       object.width,
       object.height
     );
+    if (object.otherDirection) {
+      object.x = object.x * -1;
+      this.ctx.restore();
+    }
   }
 
   addObjectsToMap(objects) {

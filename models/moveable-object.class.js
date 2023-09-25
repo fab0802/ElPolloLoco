@@ -5,6 +5,7 @@ class MoveableObject {
     this.img;
     this.imageCache = {};
     this.currentImage = 0;
+    this.otherDirection = false;
   }
 
   loadImage(path) {
