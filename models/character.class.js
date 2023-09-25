@@ -1,8 +1,9 @@
 'use strict';
 
 class Character extends MoveableObject {
-  constructor() {
+  constructor(world) {
     super();
+    this.world = world;
     this.x = 50;
     this.y = 225;
     this.width = 100;
@@ -22,10 +23,12 @@ class Character extends MoveableObject {
 
   animate() {
     setInterval(() => {
-      const i = this.currentImage % this.imagesWalking.length;
-      const path = this.imagesWalking[i];
-      this.img = this.imageCache[path];
-      this.currentImage++;
+      if (this.world.keyboard.right) {
+        const i = this.currentImage % this.imagesWalking.length;
+        const path = this.imagesWalking[i];
+        this.img = this.imageCache[path];
+        this.currentImage++;
+      }
     }, 1000 / 25);
   }
 }

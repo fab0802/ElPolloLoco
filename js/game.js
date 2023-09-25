@@ -1,8 +1,8 @@
 'use strict';
 
 const canvas = document.querySelector('canvas');
-const world = new World(canvas);
 const keyboard = new Keyboard();
+const world = new World(canvas, keyboard);
 
 function init() {
   [canvas.width, canvas.height] = [720, 480];
