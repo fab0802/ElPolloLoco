@@ -5,5 +5,6 @@ class Level {
     this.backgroundObjects = backgroundObjects;
     this.enemies = enemies;
     this.clouds = clouds;
+    this.levelEndX = 2200;
   }
 }

@@ -8,7 +8,7 @@ class Character extends MoveableObject {
     this.y = 228;
     this.width = 100;
     this.height = 200;
-    this.speedX = 50;
+    this.speedX = 10;
     this.speedY = 0;
     this.acceleration = 0.5;
     this.imagesWalking = [
@@ -33,6 +33,7 @@ class Character extends MoveableObject {
     this.loadImage(this.imagesWalking[0]);
     this.loadImages(this.imagesWalking);
     this.loadImages(this.imagesJumping);
+    this.walkingSound = new Audio('audio/walking.mp3');
     this.applyGravity();
     this.animate();
   }
@@ -52,17 +53,20 @@ class Character extends MoveableObject {
 
   animate() {
     setInterval(() => {
-      if (this.world.keyboard.right) {
+      this.walkingSound.pause();
+      if (this.world.keyboard.right && this.x < this.world.level.levelEndX) {
         this.moveRight();
         this.playAnimation(this.imagesWalking);
         this.otherDirection = false;
+        this.walkingSound.play();
       }
-      if (this.world.keyboard.left) {
+      if (this.world.keyboard.left && this.x > 0) {
         this.moveLeft();
         this.playAnimation(this.imagesWalking);
         this.otherDirection = true;
+        this.walkingSound.play();
       }
-      this.world.cameraX = -this.x;
+      this.world.cameraX = -this.x + 100;
       if (this.isAboveGround()) {
         this.playAnimation(this.imagesJumping);
       }
