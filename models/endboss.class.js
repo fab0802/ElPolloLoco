@@ -1,9 +1,8 @@
 'use strict';
 
 class Endboss extends MoveableObject {
-  constructor(world) {
+  constructor() {
     super();
-    this.world = world;
     this.x = 2000;
     this.y = -30;
     this.width = 500;
