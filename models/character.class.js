@@ -8,6 +8,7 @@ class Character extends MoveableObject {
     this.y = 228;
     this.width = 100;
     this.height = 200;
+    this.offset = { top: 90, bottom: 100, left: 20, right: 45 };
     this.speedX = 10;
     this.speedY = 0;
     this.acceleration = 0.5;
@@ -78,6 +79,10 @@ class Character extends MoveableObject {
 
   moveRight() {
     this.x += this.speedX;
+    // console.log(this.x + this.width - this.offset.right);
+    // console.log(
+    //   this.world.level.enemies[0].x - this.world.level.enemies[0].offset.left
+    // );
   }
 
   moveLeft() {

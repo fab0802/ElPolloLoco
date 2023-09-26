@@ -9,6 +9,15 @@ class World {
     this.level = level1;
     this.character = new Character(this);
     this.drawWorld();
+    this.checkCollisions();
+  }
+
+  checkCollisions() {
+    setInterval(() => {
+      this.level.enemies.forEach((enemy) => {
+        if (this.character.isColliding(enemy)) console.log('kollison');
+      });
+    }, 1000 / 25);
   }
 
   drawWorld() {
@@ -30,23 +39,12 @@ class World {
   }
 
   addObjectToMap(object) {
-    if (object.otherDirection) {
-      this.ctx.save();
-      this.ctx.translate(object.width, 0);
-      this.ctx.scale(-1, 1);
-      object.x = object.x * -1;
-    }
-    this.ctx.drawImage(
-      object.img,
-      object.x,
-      object.y,
-      object.width,
-      object.height
-    );
-    if (object.otherDirection) {
-      object.x = object.x * -1;
-      this.ctx.restore();
-    }
+    if (object.otherDirection) object.flipImage(this.ctx);
+
+    object.drawObject(this.ctx);
+    object.drawObjectFrame(this.ctx);
+
+    if (object.otherDirection) object.flipImageBack(this.ctx);
   }
 
   addObjectsToMap(objects) {

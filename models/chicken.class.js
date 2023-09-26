@@ -3,10 +3,12 @@
 class Chicken extends MoveableObject {
   constructor() {
     super();
-    this.x = Math.random() * 480 + 120;
+    // this.x = Math.random() * 480 + 120;
+    this.x = 150;
     this.y = 370;
     this.width = 50;
     this.height = 50;
+    this.offset = { top: 5, bottom: 10, left: 5, right: 10 };
     this.speedX = 0.15 + Math.random() * 0.25;
     this.imagesWalking = [
       'img/3_enemies_chicken/chicken_normal/1_walk/1_w.png',

@@ -7,6 +7,7 @@ class Coin extends DrawableObject {
     this.y = y;
     this.width = 100;
     this.height = 100;
+    this.offset = { top: 35, bottom: 70, left: 35, right: 70 };
     this.images = ['img/8_coin/coin_1.png', 'img/8_coin/coin_2.png'];
 
     this.loadImage(this.images[0]);
