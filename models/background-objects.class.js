@@ -1,6 +1,6 @@
 'use strict';
 
-class BackgroundObjects extends MoveableObject {
+class BackgroundObjects extends DrawableObject {
   constructor(imagePath, x) {
     super();
     this.x = x;

@@ -3,6 +3,11 @@
 class MoveableObject extends DrawableObject {
   constructor() {
     super();
+    this.lastHit = 0;
+  }
+
+  moveLeft() {
+    this.x -= this.speedX;
   }
 
   isColliding(object) {
@@ -18,7 +23,19 @@ class MoveableObject extends DrawableObject {
     );
   }
 
-  moveLeft() {
-    this.x -= this.speedX;
+  hit() {
+    if (this.energy > 0 && !this.isHurt()) {
+      this.energy -= 1;
+      this.lastHit = new Date().getTime();
+    }
+  }
+
+  isDead() {
+    return this.energy === 0;
+  }
+
+  isHurt() {
+    const timepassed = (new Date().getTime() - this.lastHit) / 1000;
+    return timepassed < 1;
   }
 }
