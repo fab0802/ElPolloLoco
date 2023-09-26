@@ -17,6 +17,7 @@ const level1 = new Level(
     new Bottle(1050, 350, 0),
     new Bottle(1100, 350, 1),
   ],
+  [new StatusBarHealth(), new StatusBarCoin(), new StatusBarBottle()],
   [
     new BackgroundObjects('img/5_background/layers/air.png', -719),
     new BackgroundObjects('img/5_background/layers/3_third_layer/2.png', -719),
