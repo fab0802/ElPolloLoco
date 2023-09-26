@@ -1,6 +1,6 @@
 'use strict';
 
-class Coin extends MoveableObject {
+class Coin extends DrawableObject {
   constructor(x, y) {
     super();
     this.x = x;
