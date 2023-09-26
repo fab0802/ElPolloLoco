@@ -3,7 +3,7 @@
 class StatusBarHealth extends DrawableObject {
   constructor() {
     super();
-    this.x = -40;
+    this.x = 30;
     this.y = 0;
     this.width = 200;
     this.height = 50;
@@ -15,7 +15,13 @@ class StatusBarHealth extends DrawableObject {
       'img/7_statusbars/1_statusbar/2_statusbar_health/blue/80.png',
       'img/7_statusbars/1_statusbar/2_statusbar_health/blue/100.png',
     ];
-    this.loadImage(this.images[0]);
+
     this.loadImages(this.images);
+    this.setValue(5);
+  }
+
+  setValue(value) {
+    this.value = value;
+    this.loadImage(this.images[this.value]);
   }
 }

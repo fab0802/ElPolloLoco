@@ -3,7 +3,7 @@
 class StatusBarCoin extends DrawableObject {
   constructor() {
     super();
-    this.x = -40;
+    this.x = 30;
     this.y = 50;
     this.width = 200;
     this.height = 50;

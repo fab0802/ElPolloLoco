@@ -8,6 +8,9 @@ class World {
     this.cameraX = 0;
     this.level = level1;
     this.character = new Character(this);
+    this.statusBarHealth = new StatusBarHealth();
+    this.statusBarCoin = new StatusBarCoin();
+    this.StatusBarBottle = new StatusBarBottle();
     this.drawWorld();
     this.checkCollisions();
   }
@@ -17,6 +20,7 @@ class World {
       this.level.enemies.forEach((enemy) => {
         if (this.character.isColliding(enemy)) {
           this.character.hit();
+          this.statusBarHealth.setValue(this.character.energy);
         }
       });
     }, 1000 / 25);
@@ -32,10 +36,12 @@ class World {
     this.addObjectsToMap(this.level.enemies);
     this.addObjectsToMap(this.level.coins);
     this.addObjectsToMap(this.level.bottles);
-    this.addObjectsToMap(this.level.statusBars);
     this.addObjectToMap(this.character);
 
     this.ctx.translate(-this.cameraX, 0);
+    this.addObjectToMap(this.statusBarHealth);
+    this.addObjectToMap(this.statusBarCoin);
+    this.addObjectToMap(this.StatusBarBottle);
 
     requestAnimationFrame(() => this.drawWorld());
   }
