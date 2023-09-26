@@ -21,10 +21,7 @@ class Chicken extends MoveableObject {
   animate() {
     setInterval(() => {
       this.moveLeft();
-      const i = this.currentImage % this.imagesWalking.length;
-      const path = this.imagesWalking[i];
-      this.img = this.imageCache[path];
-      this.currentImage++;
+      this.playAnimation(this.imagesWalking);
     }, 1000 / 25);
   }
 }

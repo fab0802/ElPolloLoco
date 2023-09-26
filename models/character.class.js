@@ -76,13 +76,6 @@ class Character extends MoveableObject {
     }, 1000 / 25);
   }
 
-  playAnimation(images) {
-    const i = this.currentImage % images.length;
-    const path = images[i];
-    this.img = this.imageCache[path];
-    this.currentImage++;
-  }
-
   moveRight() {
     this.x += this.speedX;
   }
