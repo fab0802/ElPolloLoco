@@ -12,10 +12,12 @@ class World {
     this.statusBarCoin = new StatusBarCoin();
     this.StatusBarBottle = new StatusBarBottle();
     this.drawWorld();
-    this.checkCollisions();
+    this.checkEnemyCollisions();
+    this.checkCoinCollisions();
+    this.checkBottleCollisions();
   }
 
-  checkCollisions() {
+  checkEnemyCollisions() {
     setInterval(() => {
       this.level.enemies.forEach((enemy) => {
         if (this.character.isColliding(enemy)) {
@@ -24,6 +26,35 @@ class World {
         }
       });
     }, 1000 / 25);
+  }
+
+  checkCoinCollisions() {
+    setInterval(() => {
+      this.level.coins.forEach((coin) => {
+        if (this.character.isColliding(coin)) {
+          this.character.collectCoin();
+          this.removeObject(this.level.coins, coin);
+          this.statusBarCoin.setValue(this.character.coins);
+        }
+      });
+    }, 1000 / 60);
+  }
+
+  checkBottleCollisions() {
+    setInterval(() => {
+      this.level.bottles.forEach((bottle) => {
+        if (this.character.isColliding(bottle)) {
+          this.character.collectBottle();
+          this.removeObject(this.level.bottles, bottle);
+          this.StatusBarBottle.setValue(this.character.bottles);
+        }
+      });
+    }, 1000 / 60);
+  }
+
+  removeObject(objectArray, object) {
+    const index = objectArray.indexOf(object);
+    objectArray.splice(index, 1);
   }
 
   drawWorld() {
@@ -39,6 +70,7 @@ class World {
     this.addObjectToMap(this.character);
 
     this.ctx.translate(-this.cameraX, 0);
+
     this.addObjectToMap(this.statusBarHealth);
     this.addObjectToMap(this.statusBarCoin);
     this.addObjectToMap(this.StatusBarBottle);

@@ -8,11 +8,13 @@ class Character extends MoveableObject {
     this.y = 228;
     this.width = 100;
     this.height = 200;
-    this.offset = { top: 90, bottom: 100, left: 20, right: 45 };
+    this.offset = { top: 80, bottom: 100, left: 20, right: 45 };
     this.speedX = 10;
     this.speedY = 0;
     this.acceleration = 1;
     this.energy = 5;
+    this.coins = 0;
+    this.bottles = 0;
     this.imagesWalking = [
       'img/2_character_pepe/2_walk/W-21.png',
       'img/2_character_pepe/2_walk/W-22.png',

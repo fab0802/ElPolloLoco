@@ -4,6 +4,8 @@ class MoveableObject extends DrawableObject {
   constructor() {
     super();
     this.lastHit = 0;
+    this.coins;
+    this.bottles;
   }
 
   moveLeft() {
@@ -23,13 +25,6 @@ class MoveableObject extends DrawableObject {
     );
   }
 
-  hit() {
-    if (this.energy > 0 && !this.isHurt()) {
-      this.energy -= 1;
-      this.lastHit = new Date().getTime();
-    }
-  }
-
   isDead() {
     return this.energy === 0;
   }
@@ -37,5 +32,20 @@ class MoveableObject extends DrawableObject {
   isHurt() {
     const timepassed = (new Date().getTime() - this.lastHit) / 1000;
     return timepassed < 1;
+  }
+
+  hit() {
+    if (this.energy > 0 && !this.isHurt()) {
+      this.energy -= 1;
+      this.lastHit = new Date().getTime();
+    }
+  }
+
+  collectCoin() {
+    if (this.coins < 5) this.coins++;
+  }
+
+  collectBottle() {
+    if (this.bottles < 5) this.bottles++;
   }
 }

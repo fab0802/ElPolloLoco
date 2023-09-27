@@ -19,9 +19,4 @@ class StatusBarHealth extends DrawableObject {
     this.loadImages(this.images);
     this.setValue(5);
   }
-
-  setValue(value) {
-    this.value = value;
-    this.loadImage(this.images[this.value]);
-  }
 }

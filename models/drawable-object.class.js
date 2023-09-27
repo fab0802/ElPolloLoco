@@ -69,4 +69,9 @@ class DrawableObject {
     this.x = this.x * -1;
     ctx.restore();
   }
+
+  setValue(value) {
+    this.value = value;
+    this.loadImage(this.images[this.value]);
+  }
 }
