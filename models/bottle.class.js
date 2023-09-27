@@ -15,10 +15,10 @@ class Bottle extends DrawableObject {
 
     this.loadImage(this.images[index]);
     this.loadImages(this.images);
-    this.setOffset(index);
+    this.setOffsetLeft(index);
   }
 
-  setOffset(index) {
+  setOffsetLeft(index) {
     if (index === 0) this.offset.left = 35;
     if (index === 1) this.offset.left = 25;
   }

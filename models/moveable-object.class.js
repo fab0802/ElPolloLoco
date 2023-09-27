@@ -12,6 +12,20 @@ class MoveableObject extends DrawableObject {
     this.x -= this.speedX;
   }
 
+  applyGravity() {
+    setInterval(() => {
+      if (this.isAboveGround() || this.speedY > 0) {
+        this.y -= this.speedY;
+        this.speedY -= this.acceleration;
+      }
+    }, 1000 / 25);
+  }
+
+  isAboveGround() {
+    if (this instanceof ThrowableObject) return true;
+    return this.y < 225;
+  }
+
   isColliding(object) {
     return (
       this.x + this.offset.left + this.width - this.offset.right >=
