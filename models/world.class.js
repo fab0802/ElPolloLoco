@@ -38,6 +38,7 @@ class World {
     this.level.coins.forEach((coin) => {
       if (this.character.isColliding(coin)) {
         this.character.collectCoin();
+        this.character.collectCoinSound.play();
         this.removeObject(this.level.coins, coin);
         this.statusBarCoin.setValue(this.character.coins);
       }
@@ -48,6 +49,7 @@ class World {
     this.level.bottles.forEach((bottle) => {
       if (this.character.isColliding(bottle)) {
         this.character.collectBottle();
+        this.character.collectBottleSound.play();
         this.removeObject(this.level.bottles, bottle);
         this.statusBarBottle.setValue(this.character.bottles);
       }
@@ -60,11 +62,14 @@ class World {
   }
 
   checkThrowObjects() {
-    if (this.keyboard.d) {
+    if (this.keyboard.d && this.character.bottles > 0) {
       const bottle = new ThrowableObject(
         this.character.x + this.character.width - this.character.offset.right,
         this.character.y + this.character.offset.top
       );
+      this.character.throwSound.play();
+      this.character.bottles--;
+      this.statusBarBottle.setValue(this.character.bottles);
       this.throwableObject.push(bottle);
     }
   }

@@ -6,11 +6,6 @@ class MoveableObject extends DrawableObject {
     this.lastHit = 0;
     this.coins;
     this.bottles;
-    this.collectCoinSound = new Audio('audio/collectCoin.mp3');
-    this.collectBottleSound = new Audio('audio/collectBottle.mp3');
-    this.isHurtSound = new Audio('audio/characterHurt.mp3');
-    this.throwSound = new Audio('audio/characterThrow.mp3');
-    this.characterJumpSound = new Audio('audio/characterJump.mp3');
   }
 
   moveLeft() {
@@ -57,21 +52,14 @@ class MoveableObject extends DrawableObject {
     if (this.energy > 0 && !this.isHurt()) {
       this.energy -= 1;
       this.lastHit = new Date().getTime();
-      this.isHurtSound.play();
     }
   }
 
   collectCoin() {
-    if (this.coins < 5) {
-      this.collectCoinSound.play();
-      this.coins++;
-    }
+    if (this.coins < 5) this.coins++;
   }
 
   collectBottle() {
-    if (this.bottles < 5) {
-      this.collectBottleSound.play();
-      this.bottles++;
-    }
+    if (this.bottles < 5) this.bottles++;
   }
 }

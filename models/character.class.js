@@ -54,6 +54,11 @@ class Character extends MoveableObject {
     this.loadImages(this.imagesHurt);
     this.loadImages(this.imagesDead);
     this.walkingSound = new Audio('audio/walking.mp3');
+    this.collectCoinSound = new Audio('audio/collectCoin.mp3');
+    this.collectBottleSound = new Audio('audio/collectBottle.mp3');
+    this.isHurtSound = new Audio('audio/characterHurt.mp3');
+    this.throwSound = new Audio('audio/characterThrow.mp3');
+    this.jumpSound = new Audio('audio/characterJump.mp3');
     this.applyGravity();
     this.animate();
   }
@@ -62,6 +67,7 @@ class Character extends MoveableObject {
     setInterval(() => {
       this.walkingSound.pause();
       if (this.world.keyboard.up && !this.isAboveGround()) this.jump();
+      if (this.isAboveGround()) this.playAnimation(this.imagesJumping);
 
       if (this.world.keyboard.right && this.x < this.world.level.levelEndX) {
         this.moveRight();
@@ -77,9 +83,10 @@ class Character extends MoveableObject {
         this.walkingSound.play();
       }
 
-      if (this.isAboveGround()) this.playAnimation(this.imagesJumping);
-
-      if (this.isHurt()) this.playAnimation(this.imagesHurt);
+      if (this.isHurt()) {
+        this.isHurtSound.play();
+        this.playAnimation(this.imagesHurt);
+      }
       if (this.isDead()) this.playAnimation(this.imagesDead);
 
       this.world.cameraX = -this.x + 100;
@@ -96,6 +103,6 @@ class Character extends MoveableObject {
 
   jump() {
     this.speedY = 15;
-    this.characterJumpSound.play();
+    this.jumpSound.play();
   }
 }
