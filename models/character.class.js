@@ -96,5 +96,6 @@ class Character extends MoveableObject {
 
   jump() {
     this.speedY = 15;
+    this.characterJumpSound.play();
   }
 }
