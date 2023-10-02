@@ -11,7 +11,8 @@ class World {
     this.statusBarHealth = new StatusBarHealth();
     this.statusBarCoin = new StatusBarCoin();
     this.statusBarBottle = new StatusBarBottle();
-    this.throwableObject = [];
+    this.throwableObjects = [];
+    this.isBottleThrown = false;
     this.drawWorld();
     this.run();
   }
@@ -21,7 +22,8 @@ class World {
       this.checkEnemyCollisions();
       this.checkCoinCollisions();
       this.checkBottleCollisions();
-      this.checkThrowObjects();
+      this.checkThrowObject();
+      this.checkThrowableObjectCollision();
     }, 1000 / 25);
   }
 
@@ -61,17 +63,36 @@ class World {
     objectArray.splice(index, 1);
   }
 
-  checkThrowObjects() {
-    if (this.keyboard.d && this.character.bottles > 0) {
+  checkThrowObject() {
+    if (this.keyboard.d && this.character.bottles > 0 && !this.isBottleThrown) {
       const bottle = new ThrowableObject(
         this.character.x + this.character.width - this.character.offset.right,
         this.character.y + this.character.offset.top
       );
+      this.isBottleThrown = true;
       this.character.throwSound.play();
       this.character.bottles--;
       this.statusBarBottle.setValue(this.character.bottles);
-      this.throwableObject.push(bottle);
+      this.throwableObjects.push(bottle);
     }
+  }
+
+  checkThrowableObjectCollision() {
+    this.throwableObjects.forEach((throwableObject, throwableObjectIndex) => {
+      this.checkThrowableObjectEnemyCollision(
+        throwableObject,
+        throwableObjectIndex
+      );
+    });
+  }
+
+  checkThrowableObjectEnemyCollision(throwableObject, throwableObjectIndex) {
+    this.level.enemies.forEach((enemy) => {
+      if (enemy.isColliding(throwableObject)) {
+        this.removeObject(this.throwableObjects, throwableObjectIndex);
+        this.isBottleThrown = false;
+      }
+    });
   }
 
   drawWorld() {
@@ -84,7 +105,7 @@ class World {
     this.addObjectsToMap(this.level.enemies);
     this.addObjectsToMap(this.level.coins);
     this.addObjectsToMap(this.level.bottles);
-    this.addObjectsToMap(this.throwableObject);
+    this.addObjectsToMap(this.throwableObjects);
     this.addObjectToMap(this.character);
 
     this.ctx.translate(-this.cameraX, 0);
