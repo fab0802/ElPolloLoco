@@ -83,6 +83,10 @@ class World {
         throwableObject,
         throwableObjectIndex
       );
+      this.checkThrowableObjectGroundCollision(
+        throwableObject,
+        throwableObjectIndex
+      );
     });
   }
 
@@ -91,8 +95,16 @@ class World {
       if (enemy.isColliding(throwableObject)) {
         this.removeObject(this.throwableObjects, throwableObjectIndex);
         this.isBottleThrown = false;
+        console.log(enemy);
       }
     });
+  }
+
+  checkThrowableObjectGroundCollision(throwableObject, throwableObjectIndex) {
+    if (!throwableObject.isAboveGround()) {
+      this.removeObject(this.throwableObjects, throwableObjectIndex);
+      this.isBottleThrown = false;
+    }
   }
 
   drawWorld() {
