@@ -93,7 +93,11 @@ class World {
   checkThrowableObjectEnemyCollision(throwableObject, throwableObjectIndex) {
     this.level.enemies.forEach((enemy) => {
       if (enemy.isColliding(throwableObject)) {
-        this.removeObject(this.throwableObjects, throwableObjectIndex);
+        throwableObject.playAnimation(throwableObject.imagesSplashing);
+        throwableObject.splashAudio.play();
+        setTimeout(() => {
+          this.removeObject(this.throwableObjects, throwableObjectIndex);
+        }, 100);
         this.isBottleThrown = false;
         console.log(enemy);
       }
@@ -102,8 +106,13 @@ class World {
 
   checkThrowableObjectGroundCollision(throwableObject, throwableObjectIndex) {
     if (!throwableObject.isAboveGround()) {
-      this.removeObject(this.throwableObjects, throwableObjectIndex);
+      throwableObject.playAnimation(throwableObject.imagesSplashing);
+      throwableObject.splashAudio.play();
+      setTimeout(() => {
+        this.removeObject(this.throwableObjects, throwableObjectIndex);
+      }, 25);
       this.isBottleThrown = false;
+      console.log(throwableObject);
     }
   }
 

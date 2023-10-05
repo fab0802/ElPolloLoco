@@ -14,7 +14,7 @@ class Character extends MoveableObject {
     this.acceleration = 1;
     this.energy = 5;
     this.coins = 0;
-    this.bottles = 0;
+    this.bottles = 5;
     this.imagesWalking = [
       'img/2_character_pepe/2_walk/W-21.png',
       'img/2_character_pepe/2_walk/W-22.png',

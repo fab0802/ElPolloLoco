@@ -28,6 +28,7 @@ class ThrowableObject extends MoveableObject {
     this.loadImage(this.imagesThrowing[1]);
     this.loadImages(this.imagesThrowing);
     this.loadImages(this.imagesSplashing);
+    this.splashAudio = new Audio('audio/bottleSplash.mp3');
     this.throw();
     this.animate();
   }
